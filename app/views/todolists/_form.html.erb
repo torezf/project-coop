@@ -1,0 +1,6 @@
+<%= form_with(model: todolist,id: 'new_todolist_form',  class: "flex mb-4") do |f| %>
+  <%= f.text_field :content, placeholder: "Type something .....", class: "flex-1 px-4 py-2 border-2 border-red-600 rounded-l-lg focus:outline-none bg-black text-white font-mono" %>
+  <%= f.button type: "submit", class: "bg-red-600 px-3 py-2 rounded-r-lg text-white hover:bg-red-700 text-lg font-mono" do %>
+    +
+  <% end %>
+<% end %>

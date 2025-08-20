@@ -32,7 +32,7 @@ RSpec.describe "Todolists", type: :system do
     within(:xpath, "//li[contains(., 'อ่านหนังสือ')]") do
       click_button "✅"
     end
-
+    sleep 0.5
     li = find("li", text: "อ่านหนังสือ")
     expect(li[:class]).to include("line-through")
     expect(li[:class]).to include("opacity-70")
@@ -50,6 +50,7 @@ RSpec.describe "Todolists", type: :system do
   it "can navigate to My Brag Document page" do
     visit root_path
     click_link "My Brag Document"
+    sleep 0.5
     expect(current_path).to eq(brag_path)
     expect(page).to have_content("BRAG DOCUMENT")
   end

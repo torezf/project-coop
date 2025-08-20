@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Brag Document", type: :system do
   before do
-    driven_by(:selenium_chrome_headless)
+    driven_by(:selenium_chrome)
   end
 
   it "shows the Brag Document page with all content" do
@@ -33,6 +33,7 @@ RSpec.describe "Brag Document", type: :system do
     visit brag_path
 
     click_link "BACK"
+    sleep 0.5
     expect(current_path).to eq(root_path)
   end
 end

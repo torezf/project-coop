@@ -1,0 +1,2 @@
+<%= turbo_stream.prepend "todolist_list", partial: "list_item", locals: { item: @todolist } %>
+<%= turbo_stream.replace "new_todolist_form", partial: "form", locals: { todolist: Todolist.new } %>

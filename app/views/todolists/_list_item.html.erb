@@ -1,0 +1,13 @@
+<li id="<%= dom_id(item) %>" class="flex items-center bg-black text-white rounded-lg px-3 py-2 justify-between border-2 border-red-600 <%= 'line-through opacity-70' if item.checklist? %>">
+  <div class="break-words whitespace-normal max-w-xs md:max-w-md">
+    <%= item.content %>
+  </div>
+  <div class="flex gap-2 shrink-0">
+    <% if item.checklist? %>
+      <%= button_to todolist_path(item), method: :patch, params: { todolist: { checklist: false } }, data: { turbo_method: :patch } do %> 👀 <% end %>
+    <% else %>
+      <%= button_to todolist_path(item), method: :patch, params: { todolist: { checklist: true } }, data: { turbo_method: :patch } do %> ✅ <% end %>
+    <% end %>
+    <%= button_to todolist_path(item), method: :delete, data: { turbo_method: :delete }, class: "" do %> ❌ <% end %>
+  </div>
+</li>
