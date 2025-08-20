@@ -17,4 +17,4 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV.fetch("DB_NAME", "todolist") %>_production
+  url: <%= ENV["DATABASE_URL"] %>
