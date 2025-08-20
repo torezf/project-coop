@@ -12,13 +12,14 @@ class TodolistsController < ApplicationController
   def edit; end
 
   def create
-    @todolist = Todolist.new(todolist_params)
+    @todolist = Todolist.new(content: params[:content]) # ใช้ params[:content] ตรงๆ เลย
     if @todolist.save
       redirect_to todolists_path, notice: "Todolist was successfully created."
     else
       render :index, status: :unprocessable_entity
     end
   end
+  # และลบบรรทัด params.require... ออก
 
   def update
     if @todolist.update(todolist_params)
@@ -43,9 +44,5 @@ class TodolistsController < ApplicationController
 
     def set_todolist
       @todolist = Todolist.find(params[:id])
-    end
-
-    def todolist_params
-      params.require(:todolist).permit(:content)
     end
 end
