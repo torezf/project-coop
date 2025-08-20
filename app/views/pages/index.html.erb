@@ -14,7 +14,7 @@
 
   <!-- Profile section -->
   <div class="flex flex-col items-center mb-8">
-    <%= image_tag "profile.jpg",
+    <%= image_tag "brag.jpg",
       alt: "Profile",
       class: "w-44 h-44 md:w-56 md:h-56 rounded-full border-4 border-red-600 object-cover mb-5 shadow-lg" %>
     <h2 class="text-2xl md:text-3xl tracking-widest font-mono font-semibold mb-1 text-gray-200 text-center">
@@ -23,10 +23,33 @@
     <div class="text-3xl md:text-4xl font-extrabold text-white italic mb-2 font-mono">TOR</div>
   </div>
 
-  <!-- กล่องรายการ Brag -->
-  <div class="w-full max-w-2xl bg-gray-900 p-6 rounded-xl border-l-4 border-red-600 shadow-xl space-y-2">
-    <% 10.times do |i| %>
-      <p class="text-white font-mono">• Example todo item <%= i + 1 %></p>
-    <% end %>
+ <div class="w-full max-w-3xl bg-gray-900 p-4 md:p-8 rounded-xl border-l-4 border-red-600 shadow-xl space-y-6 mt-2">
+  <!-- เป้าหมายในปี 2025 -->
+  <div>
+    <h2 class="text-lg md:text-2xl font-bold text-red-400 mb-2 font-mono tracking-wide">
+      เป้าหมายในปี 2025
+    </h2>
+    <ul class="list-disc pl-8 space-y-2 text-base md:text-lg text-gray-100 font-sans">
+      <li>สามารถใช้ภาษาอังกฤษในการอ่านได้อย่างคล่องแคล่ว และพูดได้</li>
+      <li>ถ่อมตน, ทำงานเป็นทีมได้, low-ego</li>
+      <li>สามารถเขียน Javascript, Spring, Spring Boot, React, Angular</li>
+      <li>คุ้นเคยกับ TDD, API REST</li>
+      <li>Codewar คะแนน ≥ 400</li>
+      <li>DevOps ได้คล่องแคล่ว Docker, Dockerfile, Docker-compose, CI/CD, Gitlab, Git</li>
+    </ul>
   </div>
+
+  <!-- Action ที่ให้ไปถึง -->
+  <div>
+    <h2 class="text-lg md:text-2xl font-bold text-red-400 mb-2 font-mono tracking-wide">
+      Action ที่ให้ไปถึง
+    </h2>
+    <ul class="list-disc pl-8 space-y-2 text-base md:text-lg text-gray-100 font-sans">
+      <li>มีการเรียน Youtube วันละ 1 ep และฝึกคุยกับ AI ทุกสัปดาห์ๆละ 1-2 ครั้ง</li>
+      <li>โฟกัสการทำงานมากขึ้น และคุยกับทีมมากขึ้น มีการทบทวนตัวเองทุกเย็น</li>
+      <li>ทำ Project ของตัวเองทุกๆ เดือน อาจจะเอาตัวแบบจาก web อื่น หรือ Youtube</li>
+      <li>ฝึก Codewar ทุกวัน วันละ 1 ข้อ แต่ถ้าข้อใหญ่ๆ ภายใน 1 อาทิตย์</li>
+    </ul>
+  </div>
+</div>
 </div>

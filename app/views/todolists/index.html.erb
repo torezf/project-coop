@@ -24,10 +24,11 @@
         <hr class="border-red-600 mb-4"/>
         <!-- Todolist Input -->
         <!-- Input form -->
-        <%= form_with(url: todolists_path, class: "flex mb-4", local: true) do |f| %>
+        <%= form_with( model: Todolist.new, class: "flex mb-4", local: true) do |f| %>
           <%= f.text_field :content, placeholder: "Type something .....", class: "flex-1 px-4 py-2 border-2 border-red-600 rounded-l-lg focus:outline-none bg-black text-white font-mono" %>
-          <%= f.submit "+", class: "bg-red-600 px-3 py-2 rounded-r-lg text-white hover:bg-red-700 text-lg font-mono", title: "Add" do %>
+          <%= f.button type: "submit", class: "bg-red-600 px-3 py-2 rounded-r-lg text-white hover:bg-red-700 text-lg font-mono", title: "Add" do %>
             <i class="fa fa-plus"></i>
+            +
           <% end %>
         <% end %>
         <ul class="space-y-2">
@@ -37,11 +38,11 @@
                 <%= item.content %>
               </div>
               <div class="flex gap-2">
-                <%= button_to complete_todolist_path(item), method: :patch, class: "...", form_class: "...", data: {turbo: "false"}, title: "Mark complete" do %>
-                  +
+                <%= button_to todolist_path(item), method: :patch,params: { todolist: { checklist: true } }, title: "Mark complete" do %>
+                  ✅
                 <% end %>
-                <%= button_to todolist_path(item), method: :delete, class: "text-red-500 hover:text-red-700 transition", form_class: 'inline', data: { turbo: "false" }, title: 'Delete' do %>
-                  -
+                <%= button_to todolist_path(item), method: :delete, title: 'Delete' do %>
+                  ❌
                 <% end %>
               </div>
             </li>

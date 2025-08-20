@@ -1,6 +1,7 @@
 require "application_system_test_case"
 
 class TodolistsTest < ApplicationSystemTestCase
+  fixtures :todolists
   setup do
     @todolist = todolists(:one)
   end

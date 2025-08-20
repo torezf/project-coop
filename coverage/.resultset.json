@@ -1,0 +1,86 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/tor/Desktop/ruby/project-coop/app/models/todolist.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/tor/Desktop/ruby/project-coop/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/tor/Desktop/ruby/project-coop/app/controllers/todolists_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/tor/Desktop/ruby/project-coop/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/tor/Desktop/ruby/project-coop/app/helpers/application_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/tor/Desktop/ruby/project-coop/app/helpers/todolists_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      }
+    },
+    "timestamp": 1755670165
+  }
+}
