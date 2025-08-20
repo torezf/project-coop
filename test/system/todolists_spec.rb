@@ -33,7 +33,7 @@ RSpec.describe "Todolists", type: :system do
       click_button "✅"
     end
 
-    li = find('li', text: "อ่านหนังสือ")
+    li = find("li", text: "อ่านหนังสือ")
     expect(li[:class]).to include("line-through")
     expect(li[:class]).to include("opacity-70")
   end
