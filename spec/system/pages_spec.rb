@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Brag Document", type: :system do
   before do
-    driven_by(:selenium_chrome)
+    driven_by(:selenium_chrome_headless)
   end
 
   it "shows the Brag Document page with all content" do
@@ -22,7 +22,6 @@ RSpec.describe "Brag Document", type: :system do
       expect(page).to have_content("Codewar คะแนน ≥ 400")
     end
 
-    # Action ที่ให้ไปถึง
     within("div.bg-gray-900") do
       expect(page).to have_content("Action ที่ให้ไปถึง")
       expect(page).to have_content("มีการเรียน Youtube วันละ 1 ep")
