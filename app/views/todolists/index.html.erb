@@ -38,8 +38,14 @@
                 <%= item.content %>
               </div>
               <div class="flex gap-2 shrink-0">
-                <%= button_to todolist_path(item), method: :patch, params: { todolist: { checklist: true } }, title: "Mark complete" do %>
-                  ✅
+                <% if item.checklist? %>
+                  <%= button_to todolist_path(item), method: :patch, params: { todolist: { checklist: false } }, title: "Unmark" do %>
+                    👀
+                  <% end %>
+                <% else %>
+                  <%= button_to todolist_path(item), method: :patch, params: { todolist: { checklist: true } }, title: "Mark complete" do %>
+                    ✅
+                  <% end %>
                 <% end %>
                 <%= button_to todolist_path(item), method: :delete, title: 'Delete' do %>
                   ❌
