@@ -10,47 +10,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Scan for common Rails security vulnerabilities using static analysis
+      - name: Scan for Rails security vulnerabilities
         run: bin/brakeman --no-pager
 
   scan_js:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Scan for security vulnerabilities in JavaScript dependencies
+      - name: Scan JS dependencies
         run: bin/importmap audit
 
   lint:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Lint code for consistent style
+      - name: RuboCop lint
         run: bin/rubocop -f github
 
   test:
@@ -64,35 +59,43 @@ jobs:
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
-        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=5
 
     steps:
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config google-chrome-stable
+      - name: Install system packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config yarn google-chrome-stable
 
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Set up database
+      # Install JS dependencies
+      - name: Install JS dependencies
+        run: yarn install --frozen-lockfile || npm install
+
+      # Build Tailwind + Propshaft assets
+      - name: Build Tailwind/Assets
+        run: bundle exec rails assets:precompile
+
+      # Setup database
+      - name: Setup database
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/project_test
-        run: |
-          bundle exec rails db:create db:migrate
+        run: bundle exec rails db:create db:migrate
 
-      - name: Run RSpec tests
+      # Run RSpec system/unit tests
+      - name: Run RSpec
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/project_test
         run: bundle exec rspec
 
-      - name: Keep screenshots from failed system tests
+      # Upload screenshots if system tests fail
+      - name: Upload screenshots
         uses: actions/upload-artifact@v4
         if: failure()
         with:
