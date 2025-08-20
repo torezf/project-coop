@@ -34,11 +34,11 @@
         <ul class="space-y-2">
           <% @todolists.each do |item| %>
             <li class="flex items-center bg-black text-white rounded-lg px-3 py-2 justify-between border-2 border-red-600 <%= 'line-through opacity-70' if item.checklist? %>">
-              <div>
+              <div class="break-words whitespace-normal max-w-xs md:max-w-md">
                 <%= item.content %>
               </div>
-              <div class="flex gap-2">
-                <%= button_to todolist_path(item), method: :patch,params: { todolist: { checklist: true } }, title: "Mark complete" do %>
+              <div class="flex gap-2 shrink-0">
+                <%= button_to todolist_path(item), method: :patch, params: { todolist: { checklist: true } }, title: "Mark complete" do %>
                   ✅
                 <% end %>
                 <%= button_to todolist_path(item), method: :delete, title: 'Delete' do %>
