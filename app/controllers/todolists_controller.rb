@@ -1,70 +1,51 @@
 class TodolistsController < ApplicationController
-  before_action :set_todolist, only: %i[ show edit update destroy ]
+  before_action :set_todolist, only: %i[ show edit update destroy complete ]
 
-  # GET /todolists or /todolists.json
   def index
-    @todolists = Todolist.all
+    @todolists = Todolist.order(created_at: :desc)
   end
 
-  # GET /todolists/1 or /todolists/1.json
-  def show
-  end
-
-  # GET /todolists/new
+  def show; end
   def new
     @todolist = Todolist.new
   end
+  def edit; end
 
-  # GET /todolists/1/edit
-  def edit
-  end
-
-  # POST /todolists or /todolists.json
   def create
     @todolist = Todolist.new(todolist_params)
-
-    respond_to do |format|
-      if @todolist.save
-        format.html { redirect_to @todolist, notice: "Todolist was successfully created." }
-        format.json { render :show, status: :created, location: @todolist }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @todolist.errors, status: :unprocessable_entity }
-      end
+    if @todolist.save
+      redirect_to todolists_path, notice: "Todolist was successfully created."
+    else
+      render :index, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /todolists/1 or /todolists/1.json
   def update
-    respond_to do |format|
-      if @todolist.update(todolist_params)
-        format.html { redirect_to @todolist, notice: "Todolist was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @todolist }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @todolist.errors, status: :unprocessable_entity }
-      end
+    if @todolist.update(todolist_params)
+      redirect_to todolists_path, notice: "Todolist was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /todolists/1 or /todolists/1.json
   def destroy
     @todolist.destroy!
+    redirect_to todolists_path, notice: "Todolist was successfully destroyed."
+  end
 
-    respond_to do |format|
-      format.html { redirect_to todolists_path, notice: "Todolist was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
-    end
+  # เพิ่ม action complete
+  def complete
+    @todolist.update(checklist: true)
+    redirect_to todolists_path
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_todolist
-      @todolist = Todolist.find(params.expect(:id))
+      @todolist = Todolist.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def todolist_params
-      params.expect(todolist: [ :content, :checklist ])
+      params.require(:todolist).permit(:content)
     end
 end

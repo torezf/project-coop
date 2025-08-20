@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
+  root "todolists#index"
   resources :todolists
-
-  get "up" => "rails/health#show", as: :rails_health_check
-
-
-  # root "posts#index"
+  get "/brag" => "pages#index"
 end
