@@ -34,6 +34,7 @@ RSpec.describe "Profile Integration", type: :system do
     visit brag_path
 
     click_link "BACK"
+    sleep 0.5
     expect(current_path).to eq(root_path)
   end
 
@@ -52,6 +53,8 @@ RSpec.describe "Profile Integration", type: :system do
       fill_in "Type something .....", with: "ออกกำลังกาย"
       find("button[type=submit]").click
     end
+    sleep 0.5
+
     expect(page).to have_content("ออกกำลังกาย")
   end
 
@@ -60,6 +63,7 @@ RSpec.describe "Profile Integration", type: :system do
     within(:xpath, "//li[contains(., 'อ่านหนังสือ')]") do
       click_button "✅"
     end
+    sleep 0.5
 
     li = find("li", text: "อ่านหนังสือ")
     expect(li[:class]).to include("line-through")
@@ -71,6 +75,7 @@ RSpec.describe "Profile Integration", type: :system do
     within(:xpath, "//li[contains(., 'อ่านหนังสือ')]") do
       click_button "❌"
     end
+    sleep 0.5
 
     expect(page).not_to have_content("อ่านหนังสือ")
   end
@@ -78,6 +83,8 @@ RSpec.describe "Profile Integration", type: :system do
   it "can navigate to My Brag Document page" do
     visit root_path
     click_link "My Brag Document"
+    sleep 0.5
+
     expect(current_path).to eq(brag_path)
     expect(page).to have_content("BRAG DOCUMENT")
   end
