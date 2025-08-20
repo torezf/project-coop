@@ -4,7 +4,6 @@ RSpec.describe "Profile Integration", type: :system do
   before do
     driven_by(:selenium_chrome_headless)
     @todolist = Todolist.create!(content: "อ่านหนังสือ", checklist: false)
-
   end
 
   it "shows the Brag Document page with all content" do
