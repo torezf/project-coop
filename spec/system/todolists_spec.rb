@@ -4,7 +4,8 @@ require "rails_helper"
 
 RSpec.describe "Todolists", type: :system do
   before do
-    # เตรียมข้อมูล
+    driven_by(:selenium_chrome)
+
     @todolist = Todolist.create!(content: "อ่านหนังสือ", checklist: false)
   end
 
